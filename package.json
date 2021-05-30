@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsnd --respawn ./src/app.ts"
+    "dev": "tsnd --respawn ./src/app.ts",
+    "build":"tsc && nodemon dist/app.js",
+    "rebuild":"rm -r ./dist && tsc && nodemon dist/app.js"
   },
   "keywords": [],
   "author": "",
