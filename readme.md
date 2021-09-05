@@ -20,3 +20,5 @@ https://sequelize.org/master/manual/typescript.html
 
 to run you can also use
 nodemon ./src/app.ts
+
+npx sequelize-cli model:generate --name Video --attributes title:string url:string

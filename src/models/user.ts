@@ -1,9 +1,8 @@
-'use strict';
 import {Model, UUIDV4} from 'sequelize';
 
 
 interface UserAttributes {
-  id: string;
+  userId: string;
   name: string;
   email: string;
   password: string;
@@ -18,7 +17,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    id!: string;
+    userId!: string;
     name!: string;
     email!: string;
     password!: string;
@@ -29,10 +28,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
       // User.belongsToMany(models.Project, {
       //   through: 'ProjectAssignments'
       // })
+      User.hasMany(models.Video,{
+        as: 'videoId', foreignKey: 'userId'
+      })
     }
   };
   User.init({
-    id: {
+    userId: {
       type: DataTypes.UUID,
       defaultValue: UUIDV4,
       allowNull: false,
