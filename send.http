@@ -6,3 +6,7 @@ content-type: application/json
     "email":"guerovera37@gmail.com",
     "password":"superpassword"
 }
+
+###
+
+delete http://localhost:3000/user/35927ea0-fc52-4b6e-bd58-9149b89267b6 HTTP/1.1

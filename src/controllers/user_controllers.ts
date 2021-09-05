@@ -56,12 +56,12 @@ const addUser = async (req:Request, res:Response, next:NextFunction) => {
     }
 }
 
-export //UNDER CONSTRUCTION
+export
 const updateUser = async (req:Request, res:Response, next:NextFunction) => {
     try {
         let id:string = req.params.id
         let body = req.body
-        if('name' in body && 'email' in body && 'address' in body) {
+        if('name' in body && 'email' in body && 'password' in body) {
             const { name, email, password } = body
             const user:User = {
                 id: id,
@@ -77,20 +77,36 @@ const updateUser = async (req:Request, res:Response, next:NextFunction) => {
                 }, 
                 {
                     where: {
-                    id: user.id
+                        userId: user.id
                     }
                 });
-            // .({
-            //     name: user.name,
-            //     email: user.email,
-            //     password: user.password
-            // })
 
             return res.status(200)
                 .send(JSON.stringify({'message':'Success'}))
         }
         return res.status(400)
             .send(JSON.stringify({'message':'Failed. User needs: name, email, address'}))
+    }
+    catch(error) {
+        console.log(error)
+        return res.status(500)
+            .send(JSON.stringify({"message":"Failed. Check internet or user id probably doesn't exist"}))
+    }
+}
+
+export
+const deleteUser = async (req:Request, res:Response, next:NextFunction) => {
+    try {
+        let id:string = req.params.id
+
+        await db.User.destroy({
+            where: {
+              userId: id
+            }
+          });
+
+        return res.status(200)
+            .send(JSON.stringify({'message':'Success'}))
     }
     catch(error) {
         console.log(error)
